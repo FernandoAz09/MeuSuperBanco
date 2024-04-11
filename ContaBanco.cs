@@ -40,11 +40,22 @@ namespace MeuSuperBanco
 
         public void Depositar( decimal valor, DateTime data, string obs)
         {
+            if (valor <= 0) {
+                throw new ArgumentOutOfRangeException(nameof(valor), "Não é possível depositar ZERO ou menos que ZERO");
+            }
             Transactions transaction = new Transactions(valor, data, obs);
             allTransactions.Add(transaction);
         }
         public void Sacar(decimal valor, DateTime data, string obs)
         {
+            if (valor <= 0)
+            {
+                throw new InvalidOperationException("Saldo insuficiente");
+            }
+            if (Saldo - valor < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(valor), "Não é possível depositar ZERO ou menos que ZERO");
+            }
             Transactions transaction = new Transactions(-valor, data, obs);
             allTransactions.Add(transaction);
         }
