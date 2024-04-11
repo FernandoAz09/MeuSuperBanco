@@ -59,5 +59,17 @@ namespace MeuSuperBanco
             Transactions transaction = new Transactions(-valor, data, obs);
             allTransactions.Add(transaction);
         }
+
+        public string TodoExtrato()
+        {
+            var extrato = new StringBuilder();
+        
+            foreach (var transaction in allTransactions)
+            {
+                extrato.AppendLine($"Data:{transaction.Date.ToShortDateString()}\t Valor:R$ {transaction.Valor}\t Obs.:{transaction.Obs}");
+
+            }
+            return extrato.ToString();
+        }
     }
 }
